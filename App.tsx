@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
+import { motion } from 'framer-motion';
 import HeroRanking from './components/HeroRanking';
 import StaffGameController from './components/StaffGameController';
 import { Team, MatchResult } from './types';
@@ -125,25 +126,31 @@ const App: React.FC = () => {
         )}
       </main>
 
-      <nav className="fixed bottom-8 left-1/2 -translate-x-1/2 w-[90%] max-w-md bg-black/90 backdrop-blur-xl border border-white/10 p-2 flex gap-2 shadow-[0_20px_50px_rgba(0,0,0,0.3)] z-[100] rounded-[2rem]">
+      <nav className="fixed bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 w-[95%] sm:w-auto min-w-[300px] sm:min-w-[400px] bg-black/90 backdrop-blur-xl border border-white/10 p-2 flex gap-2 shadow-[0_20px_50px_rgba(0,0,0,0.3)] z-[100] rounded-[2rem]">
         <button
           onClick={() => setView('public')}
-          className={`flex-1 py-4 rounded-[1.5rem] flex items-center justify-center gap-3 transition-all ${view === 'public' ? 'bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.2)]' : 'text-white/40 font-bold hover:text-white hover:bg-white/5'}`}
+          className={`relative flex-1 py-3 sm:py-4 rounded-[1.5rem] flex items-center justify-center gap-2 sm:gap-3 transition-all duration-300 ${view === 'public' ? 'bg-white text-black shadow-[0_10px_20px_rgba(255,255,255,0.1)]' : 'text-white/40 font-bold hover:text-white hover:bg-white/5'}`}
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
           </svg>
-          <span className="text-[10px] font-black uppercase tracking-widest">RANKING</span>
+          <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-wider sm:tracking-widest hidden xs:block">RANKING</span>
+          {view === 'public' && (
+            <motion.div layoutId="nav-indicator" className="absolute -bottom-1 w-8 h-1 bg-black rounded-full" />
+          )}
         </button>
 
         <button
           onClick={() => setView('staff')}
-          className={`flex-1 py-4 rounded-[1.5rem] flex items-center justify-center gap-3 transition-all ${view === 'staff' ? 'bg-[#DE0A0A] text-white shadow-[0_0_20px_rgba(222,10,10,0.4)]' : 'text-white/40 font-bold hover:text-white hover:bg-white/5'}`}
+          className={`relative flex-1 py-3 sm:py-4 rounded-[1.5rem] flex items-center justify-center gap-2 sm:gap-3 transition-all duration-300 ${view === 'staff' ? 'bg-[#DE0A0A] text-white shadow-[0_10px_20px_rgba(222,10,10,0.2)]' : 'text-white/40 font-bold hover:text-white hover:bg-white/5'}`}
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
           </svg>
-          <span className="text-[10px] font-black uppercase tracking-widest">PRO PANEL</span>
+          <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-wider sm:tracking-widest hidden xs:block">PRO PANEL</span>
+          {view === 'staff' && (
+            <motion.div layoutId="nav-indicator" className="absolute -bottom-1 w-8 h-1 bg-white rounded-full" />
+          )}
         </button>
       </nav>
 
